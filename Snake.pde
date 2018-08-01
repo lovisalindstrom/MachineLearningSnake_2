@@ -40,36 +40,36 @@ class Snake {
     location.add(velocity);
   }
   
-  void seek(Food food){
-    
-    PVector desired = PVector.sub(food.location, location);
-    //Normalize desired and scale to maximun speed
-    desired.normalize();
-    //desired.mult(maxSpeed);
-    desired.setMag(maxSpeed);
-    //Steering = desired - velocity
-    PVector steer = PVector.sub(desired, velocity);
-    steer.limit(maxForce);
-    applyForce(steer);
-    update();
-  }
-  
   //void seek(Food food){
-  //  PVector desired = PVector.sub(food.location,location);
-  //  float d = desired.mag();
-  //  if(d < 100){
-  //    float m = map(d, 0, 100, 0, maxSpeed);
-  //    desired.setMag(m);
-  //  }else{
-  //    desired.setMag(maxSpeed);
-  //  }
     
+  //  PVector desired = PVector.sub(food.location, location);
+  //  //Normalize desired and scale to maximun speed
+  //  desired.normalize();
+  //  //desired.mult(maxSpeed);
+  //  desired.setMag(maxSpeed);
   //  //Steering = desired - velocity
   //  PVector steer = PVector.sub(desired, velocity);
   //  steer.limit(maxForce);
   //  applyForce(steer);
   //  update();
   //}
+  
+  void seek(Food food){
+    PVector desired = PVector.sub(food.location,location);
+    float d = desired.mag();
+    if(d < 100){
+      float m = map(d, 0, 100, 0, maxSpeed);
+      desired.setMag(m);
+    }else{
+      desired.setMag(maxSpeed);
+    }
+    
+    //Steering = desired - velocity
+    PVector steer = PVector.sub(desired, velocity);
+    steer.limit(maxForce);
+    applyForce(steer);
+    update();
+  }
   
   void applyForce(PVector force){
     //PVector f = PVector.div(force,mass);

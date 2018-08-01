@@ -1,40 +1,29 @@
 class Node {
   
-  float f;
-  float g;
-  float h;
-  float x; 
-  float y;
+  int x; 
+  int y;
   int wdth = width / COLS;
   int hght = height / ROWS;
-  Node previous;
-  boolean wall;
   
   ArrayList<Node> neighborsList = new ArrayList<Node>();
   
-  public Node(float i, float j) {
-    this.x = i;
-    this.y = j;
-    this.f = 0;
-    this.g = 0;
-    this.h = 0;
-    this.previous = null;
+  public Node(int x, int y) {
+    this.x = x;
+    this.y = y;
   }
   
   void addNeighbors(Node[][] grid){
-    int i = (int)this.x;
-    int j = (int)this.y;
-    if(i < COLS-1){
-      neighborsList.add(grid[i+1][j]);
+    if(x < COLS-1){
+      neighborsList.add(grid[x+1][y]);
     }
-    if(i > 0){
-      neighborsList.add(grid[i-1][j]);
+    if(x > 0){
+      neighborsList.add(grid[x-1][y]);
     }
-    if(j < ROWS-1){
-      neighborsList.add(grid[i][j+1]);
+    if(y < ROWS-1){
+      neighborsList.add(grid[x][y+1]);
     }
-    if(j > 0){
-      neighborsList.add(grid[i][j-1]);
+    if(y > 0){
+      neighborsList.add(grid[x][y-1]);
     }
     //if(i > 0 && j > 0){
     //  neighborsList.add(grid[i-1][j-1]);

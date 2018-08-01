@@ -2,21 +2,18 @@
 
 Snake snake;
 Food food;
-Astar graph;
 float scl = 20; //scale
 int COLS = 20;
 int ROWS = 20;
 
+Node[][] grid = new Node[COLS][ROWS];
 
 void setup(){
   size(600, 600);
-  graph = new Astar();
-  graph.setupSearch();
   frameRate(10);
-  
+  drawGrid();
   snake = new Snake(0, 0, 1, 0); //x, y, xspeed, yspeed
   food = pickFoodLocation();
-  graph.search(snake, food);
 }
 
 
@@ -25,16 +22,23 @@ void draw(){
   
   if(snake.eat(food)){
     food = pickFoodLocation();
-    graph.search(snake, food);
   }
   
   //snake.death();
   snake.boundaries();
   snake.update();
-  //snake.seek(food);
+  snake.seek(food);
   
   snake.show();
   food.show();
+}
+
+public void drawGrid(){
+  for(int x = 0; x < COLS-1; x++){
+    for(int y = 0; y < ROWS; y++){
+      grid[x][y] = new Node(x,y);
+    }
+  }
 }
 
 public Food pickFoodLocation(){
